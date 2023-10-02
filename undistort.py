@@ -8,8 +8,17 @@ dst_path = 'output'
 src_files = os.listdir(src_path)
 dst_files = os.listdir(dst_path)
 
-k_mtx = np.array([[3980.493078255596, 0, 1986.461800767714], [0, 3976.316218026821, 1438.517307755756], [0, 0, 1]])
-DistCoef = np.array([-0.505051155821860, 0.353517378786100, 6.004038559166109e-04, 3.813929798209635e-04, -0.204032578999073])
+# Calibration1
+# k_mtx = np.array([[3980.493078255596, 0, 1986.461800767714], [0, 3976.316218026821, 1438.517307755756], [0, 0, 1]])
+# DistCoef = np.array([-0.505051155821860, 0.353517378786100, 6.004038559166109e-04, 3.813929798209635e-04, -0.204032578999073])
+
+# Calibration2
+# k_mtx = np.array([[3.982764622011378e+03,0,2.000977703943922e+03],[0,3.980605990351921e+03,1.448702752053556e+03],[0,0,1]])
+# DistCoef = np.array([-0.497543813659968,0.301051300998995, 0, 0, -0.115196832512552])
+
+# Calibration3
+k_mtx = np.array([[3.968234079665695e+03,0,1.991849156387877e+03],[0,3.965633407983756e+03,1.441696503432448e+03],[0,0,1]])
+DistCoef = np.array([-0.501539165240283,0.321058507540368, 0, 0, -0.146029710575023])
 
 def main():
     i = 0
@@ -19,7 +28,7 @@ def main():
 
         img = undistort(img, k_mtx, DistCoef, verbose=False)
 
-        cv2.imwrite(dst_path + '/' + 'undist' + src_files[i], img)
+        cv2.imwrite(dst_path + '/' + 'undistCal3_' + src_files[i], img)
 
         print(src_files[i])
 
@@ -27,7 +36,7 @@ def main():
         if i == len(src_files):
             break
 
-    print('All files are pre-annotatted')                
+    print('')                
 
 def undistort(frame, mtx, dist, verbose=False):
     """
